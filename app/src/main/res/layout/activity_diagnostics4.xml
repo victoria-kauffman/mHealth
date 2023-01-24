@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pages.Diagnostics4"
+    android:layout_marginLeft="50dp"
+    android:layout_marginRight="50dp">
+
+    <include layout="@layout/header"/>
+
+    <TextView
+        android:id="@+id/diag4_diag_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Diagnosis"
+        android:layout_marginTop="50dp"
+        android:textSize="24dp"
+        android:layout_below="@id/header"
+        />
+
+    <EditText
+        android:id="@+id/diag4_diag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:hint="Enter Diagnosis"
+        android:layout_below="@+id/diag4_diag_text"
+        />
+
+    <TextView
+        android:id="@+id/diag4_treat_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Treatment Plan"
+        android:layout_marginTop="50dp"
+        android:textSize="24dp"
+        android:layout_below="@id/diag4_diag"
+        />
+
+    <EditText
+        android:id="@+id/diag4_treat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:hint="Enter Treatment Plan"
+        android:layout_below="@+id/diag4_treat_text"
+        />
+
+    <include layout="@layout/footer"
+        android:layout_below="@+id/diag4_treat"
+        android:layout_width="match_parent"
+        android:layout_marginTop="40dp"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

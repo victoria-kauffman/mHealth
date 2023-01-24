@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pages.PatientSurvey"
+    android:layout_marginLeft="50dp"
+    android:layout_marginRight="50dp"
+    >
+
+    <include layout="@layout/header"/>
+
+    <TextView
+        android:id="@+id/survey_village_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Where are you from?"
+        android:layout_marginTop="50dp"
+
+        android:textSize="24dp"
+        android:layout_below="@id/header"
+        />
+
+    <EditText
+        android:id="@+id/survey_village"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPostalAddress"
+        android:hint="Enter Hometown"
+        android:layout_below="@+id/survey_village_text"
+        />
+
+    <TextView
+        android:id="@+id/survey_distance_walked_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="How far did you travel to come here?"
+        android:layout_marginTop="40dp"
+        android:textSize="24dp"
+        android:layout_below="@+id/survey_village"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@id/survey_distance_walked"
+        android:orientation="horizontal"
+        android:layout_below="@+id/survey_distance_walked_text"
+        >
+            <NumberPicker
+                android:id="@+id/survey_distance_walked_num"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+
+        <!-- Might want to replace to km text if you don't want multiple unit options -->
+            <NumberPicker
+                android:id="@+id/survey_distance_walked_unit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="40dp"
+                />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/survey_time_waited_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="About how long did you wait today?"
+        android:layout_marginTop="40dp"
+        android:textSize="24dp"
+        android:layout_below="@+id/survey_distance_walked"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/survey_time_waited"
+        android:orientation="horizontal"
+        android:layout_below="@+id/survey_time_waited_text"
+        >
+        <NumberPicker
+            android:id="@+id/survey_time_waited_hr"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/survey_time_waited_hr_unit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" hours"
+            android:gravity="center"
+            android:layout_marginRight="50dp"
+            android:textSize="24dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            />
+
+        <!-- Might want to replace to km text if you don't want multiple unit options -->
+        <NumberPicker
+            android:id="@+id/survey_time_waited_min"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="40dp"
+            />
+
+        <TextView
+            android:id="@+id/survey_time_waited_min_unit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" minutes"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+
+    <include layout="@layout/footer"
+        android:layout_below="@+id/survey_time_waited"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

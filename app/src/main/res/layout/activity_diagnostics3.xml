@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pages.Diagnostics3"
+    android:layout_marginLeft="50dp"
+    android:layout_marginRight="50dp">
+
+    <include layout="@layout/header"/>
+
+    <TextView
+        android:id="@+id/diag3_pres_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Presentation"
+        android:layout_marginTop="50dp"
+        android:textSize="24dp"
+        android:layout_below="@id/header"
+        />
+
+    <EditText
+        android:id="@+id/diag3_pres"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:hint="Enter Presentation"
+        android:layout_below="@+id/diag3_pres_text"
+        />
+
+    <TextView
+        android:id="@+id/diag3_assess_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Assessment"
+        android:layout_marginTop="50dp"
+        android:textSize="24dp"
+        android:layout_below="@id/diag3_pres"
+        />
+
+    <EditText
+        android:id="@+id/diag3_assess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:hint="Enter Assessment"
+        android:layout_below="@+id/diag3_assess_text"
+        />
+
+    <include layout="@layout/footer"
+        android:layout_below="@+id/diag3_assess"
+        android:layout_width="match_parent"
+        android:layout_marginTop="40dp"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

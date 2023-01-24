@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pages.MainActivity"
+    android:layout_marginLeft="50dp"
+    android:layout_marginRight="50dp">
+    
+    <TextView
+        android:id="@+id/main_username_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:layout_marginTop="150dp"
+        android:textSize="24dp"
+        />
+    
+    <EditText
+        android:id="@+id/main_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Enter Username"
+        android:layout_below="@+id/main_username_text"
+        />
+
+    <TextView
+        android:id="@+id/main_password_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:layout_marginTop="40dp"
+        android:textSize="24dp"
+        android:layout_below="@+id/main_username"
+        />
+
+    <EditText
+        android:id="@+id/main_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Password"
+        android:inputType="textPassword"
+        android:layout_below="@+id/main_password_text"
+        />
+
+    <Button
+        android:id="@+id/main_login_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/main_password"
+        android:textSize="24dp"
+        />
+
+</RelativeLayout>

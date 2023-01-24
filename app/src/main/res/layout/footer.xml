@@ -1,0 +1,6 @@
+<Button
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/footer_next"
+    android:text="Next"
+    android:textSize="24dp"
+    />

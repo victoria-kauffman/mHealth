@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pages.Diagnostics2"
+    android:layout_marginRight="50dp"
+    android:layout_marginLeft="50dp">
+
+    <include layout="@layout/header"/>
+
+    <TextView
+        android:id="@+id/diag2_bp_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Blood Pressure"
+        android:layout_marginTop="50dp"
+        android:textSize="24dp"
+        android:layout_below="@id/header"
+        />
+
+    <EditText
+        android:id="@+id/diag2_bp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/diag2_bp_text"
+        android:hint="BP"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/diag2_rr_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Respiratory Rate"
+        android:layout_marginTop="50dp"
+        android:textSize="24dp"
+        android:layout_below="@+id/diag2_bp"
+        />
+
+    <EditText
+        android:id="@+id/diag2_rr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/diag2_rr_text"
+        android:hint="RR"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/diag2_p_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pulse"
+        android:layout_marginTop="50dp"
+        android:textSize="24dp"
+        android:layout_below="@+id/diag2_rr"
+        />
+
+    <EditText
+        android:id="@+id/diag2_p"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/diag2_p_text"
+        android:hint="P"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/diag2_muac_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Respiratory Rate"
+        android:layout_marginTop="50dp"
+        android:textSize="24dp"
+        android:layout_below="@+id/diag2_p"
+        />
+
+    <EditText
+        android:id="@+id/diag2_muac"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/diag2_muac_text"
+        android:hint="MUAC"
+        android:inputType="number" />
+
+    <include layout="@layout/footer"
+        android:layout_below="@+id/diag2_muac"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>
