@@ -10,13 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.moh.mhealth.Global_Helper;
 import com.moh.mhealth.PatientDatabase;
 import com.moh.mhealth.R;
 
 public class MainActivity extends AppCompatActivity {
-
-    String USERNAME = "user"; // Gonna need to fix
-    String PASSWORD = "1234"; // Gonna need to fix
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +34,10 @@ public class MainActivity extends AppCompatActivity {
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
                 
-                if (user.equals(USERNAME) && pass.equals(PASSWORD)) {
-                    Toast.makeText(MainActivity.this, "Welcome, " + user, Toast.LENGTH_SHORT).show();
+                if (user.equals(Global_Helper.USERNAME) && pass.equals(Global_Helper.PASSWORD)) {
+                    Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
 
-                    // Initialize database
-                    PatientDatabase db = Room.databaseBuilder(getApplicationContext(),
-                                                              PatientDatabase.class,
-                                                              "patient-database").build();
-
-                    Intent intent = new Intent(getApplicationContext(), NewPatient.class);
+                    Intent intent = new Intent(getApplicationContext(), PatientList.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();

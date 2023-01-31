@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".pages.PatientSurvey"
     android:layout_marginLeft="50dp"
     android:layout_marginRight="50dp"
-    >
+    android:scrollbarSize="25sp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
 
     <include layout="@layout/header"/>
 
@@ -35,7 +40,7 @@
         android:id="@+id/survey_distance_walked_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="How far did you travel to come here?"
+        android:text="About how long did you travel to come here?"
         android:layout_marginTop="40dp"
         android:textSize="24dp"
         android:layout_below="@+id/survey_village"
@@ -49,20 +54,44 @@
         android:layout_below="@+id/survey_distance_walked_text"
         >
             <NumberPicker
-                android:id="@+id/survey_distance_walked_num"
+                android:id="@+id/survey_distance_walked_days"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 />
 
-        <!-- Might want to replace to km text if you don't want multiple unit options -->
+
+            <TextView
+                android:id="@+id/survey_distance_walked_days_unit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" days"
+                android:gravity="center"
+                android:layout_marginRight="50dp"
+                android:textSize="24dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                />
+
             <NumberPicker
-                android:id="@+id/survey_distance_walked_unit"
+                android:id="@+id/survey_distance_walked_hours"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="40dp"
                 />
+
+        <TextView
+            android:id="@+id/survey_distance_walked_hours_unit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" hours"
+            android:gravity="center"
+            android:layout_marginRight="50dp"
+            android:textSize="24dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            />
     </LinearLayout>
 
     <TextView
@@ -122,9 +151,13 @@
             />
     </LinearLayout>
 
-    <include layout="@layout/footer"
+    <Button
+        android:id="@+id/survey_next"
+        android:text="Next"
+        android:textSize="24dp"
         android:layout_below="@+id/survey_time_waited"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-</RelativeLayout>
+        android:layout_height="wrap_content"
+        />
+    </RelativeLayout>
+</ScrollView>

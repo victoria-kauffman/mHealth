@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pages.MainActivity"
+    android:layout_marginLeft="50dp"
+    android:layout_marginRight="50dp"
+    android:scrollbarSize="25sp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+    <Button
+        android:id="@+id/patient_list_new_patient_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add a New Patient"
+        android:layout_marginTop="50dp"
+        android:textSize="24dp"
+        />
+
+    </RelativeLayout>
+</ScrollView>

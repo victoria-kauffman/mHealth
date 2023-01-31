@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".pages.Diagnostics2"
     android:layout_marginRight="50dp"
-    android:layout_marginLeft="50dp">
+    android:layout_marginLeft="50dp"
+    android:scrollbarSize="25sp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
 
     <include layout="@layout/header"/>
 
@@ -20,13 +26,38 @@
         android:layout_below="@id/header"
         />
 
-    <EditText
-        android:id="@+id/diag2_bp"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/diag2_bp_text"
-        android:hint="BP"
-        android:inputType="number" />
+        android:id="@+id/diag2_bp"
+        android:layout_below="@id/diag2_bp_text">
+        <EditText
+            android:id="@+id/diag2_bp1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Systolic"
+            android:inputType="number"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="/"
+            android:textSize="24dp"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/diag2_bp2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Diastolic"
+            android:inputType="number"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+
+
 
     <TextView
         android:id="@+id/diag2_rr_text"
@@ -43,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/diag2_rr_text"
-        android:hint="RR"
+        android:hint="Respiratory Rate"
         android:inputType="number" />
 
     <TextView
@@ -61,30 +92,51 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/diag2_p_text"
-        android:hint="P"
+        android:hint="Pulse"
         android:inputType="number" />
 
     <TextView
         android:id="@+id/diag2_muac_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Respiratory Rate"
+        android:text="Middle Upper Arm Circumference"
         android:layout_marginTop="50dp"
         android:textSize="24dp"
         android:layout_below="@+id/diag2_p"
         />
 
-    <EditText
-        android:id="@+id/diag2_muac"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/diag2_muac_text"
-        android:hint="MUAC"
-        android:inputType="number" />
+        android:id="@+id/diag2_muac"
+        android:layout_below="@id/diag2_muac_text">
+        <EditText
+            android:id="@+id/diag2_muac_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/diag2_muac_text"
+            android:hint="MUAC"
+            android:layout_weight="1"
+            android:inputType="numberDecimal" />
 
-    <include layout="@layout/footer"
-        android:layout_below="@+id/diag2_muac"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=" cm"
+            android:textSize="24dp"
+            android:id="@+id/diag2_muac_unit"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/diag2_next"
+        android:text="Next"
+        android:textSize="24dp"
         android:layout_marginTop="40dp"
+        android:layout_below="@+id/diag2_muac"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</RelativeLayout>
+        android:layout_height="wrap_content"
+        />
+    </RelativeLayout>
+</ScrollView>
