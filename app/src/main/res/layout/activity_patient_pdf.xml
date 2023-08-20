@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/container_PDF">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:padding="25dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginBottom="50dp">
+
+
+                <Button
+                    android:id="@+id/return_to_pl"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="0.33"
+                    android:text="Back to Patient List"></Button>
+
+                <Button
+                    android:id="@+id/switch_units"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="0.33"
+                    android:text="Switch to Imperial Units"></Button>
+
+                <Button
+                    android:id="@+id/generate_pdf"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_weight="0.33"
+                    android:text="Save as PDF"></Button>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/pdf_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Patient Name"
+                android:textSize="50dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/pdf_dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DOB: "
+                android:textSize="30dp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/pdf_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gender: "
+                android:textSize="30dp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                ></TextView>
+            <TextView
+                android:id="@+id/pdf_village"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hometown: "
+                android:textSize="30dp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                ></TextView>
+            <TextView
+                android:id="@+id/pdf_distance_travled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Distance Traveled: "
+                android:textSize="30dp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                ></TextView>
+            <TextView
+                android:id="@+id/pdf_time_waited"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Time Waited: "
+                android:textSize="30dp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                ></TextView>
+            <TextView
+            android:id="@+id/pdf_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Weight: "
+            android:textSize="30dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"
+            ></TextView>
+            <TextView
+            android:id="@+id/pdf_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Height: "
+            android:textSize="30dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"
+            ></TextView><TextView
+            android:id="@+id/pdf_temp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Temperature: "
+            android:textSize="30dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"
+            ></TextView><TextView
+            android:id="@+id/pdf_bp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Blood Pressure: "
+            android:textSize="30dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"
+            ></TextView><TextView
+            android:id="@+id/pdf_pulse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pulse: "
+            android:textSize="30dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"
+            ></TextView>
+            <TextView
+                android:id="@+id/pdf_rr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Respiratory Rate: "
+                android:textSize="30dp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                ></TextView>
+            <TextView
+                android:id="@+id/pdf_muac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Middle Upper Arm Circumference: "
+                android:textSize="30dp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                ></TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                android:orientation="vertical"
+                >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Presentation"
+                android:textStyle="bold|italic"
+                android:textSize="30dp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                ></TextView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pdf_pres"
+                    android:textSize="30dp"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="20dp"
+                    ></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Assessment"
+                    android:textStyle="bold|italic"
+                    android:textSize="30dp"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="20dp"
+                    ></TextView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pdf_assess"
+                    android:textSize="30dp"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="20dp"
+                    ></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Diagnosis"
+                    android:textStyle="bold|italic"
+                    android:textSize="30dp"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="20dp"
+                    ></TextView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pdf_diag"
+                    android:textSize="30dp"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="20dp"
+                    ></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Treatment Plan"
+                    android:textStyle="bold|italic"
+                    android:textSize="30dp"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="20dp"
+                    ></TextView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pdf_treat"
+                    android:textSize="30dp"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="20dp"
+                    ></TextView>
+            </LinearLayout>
+
+
+
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

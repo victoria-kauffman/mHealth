@@ -38,23 +38,23 @@ public class Global_Helper {
 
 
     public static double getLbToKg(double lb) {
-        return lb * 0.45359237;
+        return Math.round(lb * 0.45359237 * 100.0) / 100.0;
     }
-    public static int getInchToCm(double in) {
-        return (int) Math.round(in * 2.54);
+    public static double getInchToCm(double in) {
+        return Math.round(in * 2.54 * 100.0) / 100.0;
     }
     public static double getFToC(double f) {
-        return (f - 32) * (5/9.0);
+        return Math.round((f - 32) * (5/9.0) * 100.0) / 100.0;
     }
 
     public static double getKgToLb(double kg) {
-        return kg / 0.45359237;
+        return Math.round(kg / 0.45359237 * 100.0) / 100.0;
     }
-    public static int getCmToInch(double cm) {
-        return (int) Math.round(cm / 2.54);
+    public static double getCmToInch(double cm) {
+        return Math.round(cm / 2.54 * 100.0) / 100.0;
     }
     public static double getCToF(double c) {
-        return (9/5.0 * c) + 32;
+        return Math.round(((9/5.0 * c) + 32) * 100.0) / 100.0;
     }
 
     public static double getDoubleFromEditText(EditText editText) {
@@ -104,7 +104,7 @@ public class Global_Helper {
     }
     // Wrapper to both save diag1 variables and convert imperial to metric
     public static void addDiag1Imperial(double lbs, int ft, int inch, double tempF) {
-        addDiag1Metric(getLbToKg(lbs), getInchToCm(ft * 12 + inch), getFToC(tempF));
+        addDiag1Metric(getLbToKg(lbs), (int) getInchToCm(ft * 12 + inch), getFToC(tempF));
     }
 
     public static void addDiag2(int[] bp, int p, int rr, double muacCM) {

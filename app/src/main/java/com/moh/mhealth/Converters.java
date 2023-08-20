@@ -60,12 +60,18 @@ public class Converters {
 
     @TypeConverter
     public static String fromLocation(SimpleLocation loc) {
+        if (loc == null) {
+            return "";
+        }
         return loc.getLatitude() + ";" + loc.getLongitude();
     }
 
     @TypeConverter
     public static SimpleLocation toLocation(String locStr) {
         String[] latLong = locStr.split(";");
+        if (locStr.length() < 2) {
+            return null;
+        }
         return new SimpleLocation(Double.parseDouble(latLong[0]), Double.parseDouble(latLong[1]));
     }
 }

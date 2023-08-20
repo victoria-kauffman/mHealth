@@ -1,8 +1,7 @@
 package com.moh.mhealth;
 
-import androidx.room.ColumnInfo;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class PatientListTuple {
 
@@ -10,5 +9,5 @@ public class PatientListTuple {
 
     public String name;
 
-    public Date dob;
+    public LocalDate dob;
 }
