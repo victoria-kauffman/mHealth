@@ -77,7 +77,7 @@ class Diagnostics1 : AppCompatActivity(), Header {
     }
 
     private fun loadPatientData() {
-        val patient = Global_Helper.getCurrentPatient()
+        val patient = Global_Helper.currentPatient
         var weight = patient.weight
         var height = patient.height
         var temp = patient.temp

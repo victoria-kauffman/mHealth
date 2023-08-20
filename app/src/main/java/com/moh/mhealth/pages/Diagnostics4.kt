@@ -45,12 +45,12 @@ class Diagnostics4 : AppCompatActivity(), Header {
     }
 
     private fun savePatient() {
-        patientViewModel.insert( Global_Helper.getCurrentPatient() )
+        patientViewModel.insert( Global_Helper.currentPatient)
         Toast.makeText(this, "Patient Saved.", Toast.LENGTH_SHORT).show()
     }
 
     private fun loadPatientData() {
-        val patient = Global_Helper.getCurrentPatient()
+        val patient = Global_Helper.currentPatient
         val patient_name = findViewById<View>(R.id.header_name) as TextView
         patient_name.text = patient.name
         diagField!!.setText(patient.diag)
