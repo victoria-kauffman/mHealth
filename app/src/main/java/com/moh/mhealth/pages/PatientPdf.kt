@@ -1,77 +1,86 @@
 package com.moh.mhealth.pages
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import com.moh.mhealth.*
+import com.moh.mhealth.objects.Patient
+import com.moh.mhealth.patientdatabase.PatientViewModel
 import java.time.format.DateTimeFormatter
-import kotlin.math.truncate
+import kotlin.math.roundToInt
 
 class PatientPdf : AppCompatActivity() {
 
-    private val patientViewModel: PatientViewModel by viewModels {
-        PatientViewModelFactory(( application as PatientApplication ).repository)
-    }
+    private val patientViewModel: PatientViewModel by viewModels { PatientViewModel.Factory }
 
-    var switchUnit : Button? = null
+    private var switchUnit : Button? = null
     var patient : Patient? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patient_pdf)
 
-        var isMetric : Boolean = true
+        var isMetric = true
 
-        patientViewModel.patientById.observe(this, Observer {
+        patientViewModel.patientById.observe(this) {
             patient = patientViewModel.patientById.value!![0]
             setPdfInfo(patient!!)
             setMetric(patient!!)
-        })
+        }
         patientViewModel.getPatient(intent.extras!!.getInt("pid"))
 
 
         val backButton : Button = findViewById(R.id.return_to_pl)
-        backButton.setOnClickListener(View.OnClickListener {
+        backButton.setOnClickListener {
             startActivity(Intent(applicationContext, PatientList::class.java))
-        })
+        }
 
         switchUnit = findViewById(R.id.switch_units)
-        switchUnit!!.setOnClickListener(View.OnClickListener {
-            isMetric = ! isMetric
+        switchUnit!!.setOnClickListener {
+            isMetric = !isMetric
 
             if (isMetric) {
                 setMetric(patient)
             } else {
                 setImperial(patient)
             }
-        })
+        }
 
 
         val generatePDF : Button = findViewById(R.id.generate_pdf)
-        generatePDF.setOnClickListener(View.OnClickListener {
+        generatePDF.setOnClickListener {
 
-        })
+        }
     }
 
     private fun setPdfInfo(patient : Patient) {
         findViewById<TextView>(R.id.pdf_name).text = patient.name
         findViewById<TextView>(R.id.pdf_gender).append(patient.gender.toString())
-        findViewById<TextView>(R.id.pdf_dob).append(patient.dob.format(DateTimeFormatter.ofPattern("YYYY-MM-dd")))
+        if (patient.dob != null) {
+            findViewById<TextView>(R.id.pdf_dob).append(patient.dob!!.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+        }
+        if (patient.distanceTraveled != null) {
+            findViewById<TextView>(R.id.pdf_village).append(patient.village)
+            findViewById<TextView>(R.id.pdf_distance_travled).append(
+                patient.distanceTraveled!![0].toString() + " days, " +
+                        patient.distanceTraveled!![1].toString() + " hours"
+            )
+        }
 
-        findViewById<TextView>(R.id.pdf_village).append(patient.village)
-        findViewById<TextView>(R.id.pdf_distance_travled).append(patient.distance_traveled[0].toString() + " days, " +
-                patient.distance_traveled[1].toString() + " hours")
-        findViewById<TextView>(R.id.pdf_time_waited).append(patient.time_waited[0].toString() + " hours, " +
-                patient.time_waited[1].toString() + " minutes")
+        if (patient.timeWaited != null) {
+            findViewById<TextView>(R.id.pdf_time_waited).append(
+                patient.timeWaited!![0].toString() + " hours, " +
+                        patient.timeWaited!![1].toString() + " minutes"
+            )
+        }
 
-
-
-        findViewById<TextView>(R.id.pdf_bp).append(patient.bp[0].toString() + " / " + patient.bp[1].toString())
+        if (patient.bp != null) {
+            findViewById<TextView>(R.id.pdf_bp).append(patient.bp!![0].toString() + " / " + patient.bp!![1].toString())
+        }
         findViewById<TextView>(R.id.pdf_pulse).append(patient.p.toString())
         findViewById<TextView>(R.id.pdf_rr).append(patient.rr.toString())
 
@@ -82,6 +91,7 @@ class PatientPdf : AppCompatActivity() {
         findViewById<TextView>(R.id.pdf_treat).text = (patient.treat)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setMetric(patient : Patient?) {
         if (patient == null) {
             return
@@ -93,16 +103,29 @@ class PatientPdf : AppCompatActivity() {
         findViewById<TextView>(R.id.pdf_muac).text = "Middle Upper Arm Circumference: "  + (patient.muac.toString() + " cm")
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setImperial(patient : Patient?) {
         if (patient == null) {
             return
         }
-        findViewById<TextView>(R.id.pdf_weight).text = "Weight: " + (Global_Helper.getKgToLb(patient.weight).toString() + " lbs")
-
-        val patientHeight = Global_Helper.getCmToInch(patient.height.toDouble())
-        findViewById<TextView>(R.id.pdf_height).text = "Height: " + (patientHeight / 12).toInt().toString() + "\'" + Math.round(patientHeight % 12).toInt().toString() + "\""
-        findViewById<TextView>(R.id.pdf_temp).text = "Temperature: " + (Global_Helper.getCToF(patient.temp).toString()) + " °F"
-
-        findViewById<TextView>(R.id.pdf_muac).text = "Middle Upper Arm Circumference: "  + (Global_Helper.getCmToInch(patient.muac).toString()) + " inches"
+        if (patient.weight != null) {
+            findViewById<TextView>(R.id.pdf_weight).text =
+                "Weight: " + (GlobalHelper.getKgToLb(patient.weight!!).toString() + " lbs")
+        }
+        if (patient.height != null) {
+            val patientHeight = GlobalHelper.getCmToInch(patient.height!!.toDouble())
+            findViewById<TextView>(R.id.pdf_height).text =
+                "Height: " + (patientHeight / 12).toInt()
+                    .toString() + "\'" + (patientHeight % 12).roundToInt().toString() + "\""
+        }
+        if (patient.temp != null) {
+            findViewById<TextView>(R.id.pdf_temp).text =
+                "Temperature: " + (GlobalHelper.getCToF(patient.temp!!).toString()) + " °F"
+        }
+        if (patient.muac != null) {
+            findViewById<TextView>(R.id.pdf_muac).text =
+                "Middle Upper Arm Circumference: " + (GlobalHelper.getCmToInch(patient.muac!!)
+                    .toString()) + " inches"
+        }
     }
 }

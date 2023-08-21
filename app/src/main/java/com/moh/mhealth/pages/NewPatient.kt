@@ -8,7 +8,7 @@ import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.NumberPicker
 import androidx.appcompat.app.AppCompatActivity
-import com.moh.mhealth.Global_Helper
+import com.moh.mhealth.GlobalHelper
 import com.moh.mhealth.R
 import java.time.LocalDate
 
@@ -16,10 +16,10 @@ import java.time.LocalDate
 class NewPatient : AppCompatActivity() {
     private val displayedGenders = arrayOf("F", "M", "O")
     private val displayedUnits = arrayOf("Metric", "Imperial")
-    var genderPicker: NumberPicker? = null
-    var nameField: EditText? = null
-    var dobPicker: DatePicker? = null
-    var unitsPicker: NumberPicker? = null
+    private var genderPicker: NumberPicker? = null
+    private var nameField: EditText? = null
+    private var dobPicker: DatePicker? = null
+    private var unitsPicker: NumberPicker? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_patient)
@@ -38,14 +38,14 @@ class NewPatient : AppCompatActivity() {
         val saveBtn = findViewById<View>(R.id.np_create_patient) as Button
         saveBtn.setOnClickListener {
             savePatientData()
-            startActivity(Intent(applicationContext, Global_Helper.nextDiag()))
+            startActivity(Intent(applicationContext, GlobalHelper.nextDiag()))
         }
     }
 
     private fun savePatientData() {
-        val patient = Global_Helper.getCurrentPatient()
+        val patient = GlobalHelper.currentPatient
         if (patient == null) {
-            Global_Helper.createNewPatient(
+            GlobalHelper.createNewPatient(
                 nameField!!.text.toString(),
                 displayedGenders[genderPicker!!.value][0],
                 LocalDate.of(
@@ -63,13 +63,13 @@ class NewPatient : AppCompatActivity() {
                 dobPicker!!.dayOfMonth
             )
         }
-        Global_Helper.setUnits(unitsPicker!!.value)
+        GlobalHelper.isMetric = (unitsPicker!!.value == 0)
     }
 
     private fun loadPatientData() {
-        val patient = Global_Helper.getCurrentPatient()
+        val patient = GlobalHelper.currentPatient
             ?: return  // Nothing to load
-        nameField.setText(patient.name) // Set name
+        nameField!!.setText(patient.name) // Set name
         when (patient.gender) {
             'M' -> {
                 assert(displayedGenders[1] === "M")
@@ -85,8 +85,8 @@ class NewPatient : AppCompatActivity() {
             }
         }
         val dob = patient.dob
-        dobPicker!!.init(dob!!.year, dob!!.monthValue - 1, dob!!.dayOfMonth, null)
-        if (Global_Helper.isMetric()) {
+        dobPicker!!.init(dob!!.year, dob.monthValue - 1, dob.dayOfMonth, null)
+        if (GlobalHelper.isMetric) {
             assert(displayedUnits[0] === "Metric")
             unitsPicker!!.value = 0
         } else {
@@ -95,7 +95,7 @@ class NewPatient : AppCompatActivity() {
         }
     }
 
-    fun cancel(view: View?) {
-        startActivity(Intent(applicationContext, Global_Helper.endPatient()))
+    fun cancel(view: View) {
+        startActivity(Intent(applicationContext, GlobalHelper.endPatient()))
     }
 }

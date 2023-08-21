@@ -1,6 +1,7 @@
 package com.moh.mhealth
 
 import androidx.room.TypeConverter
+import com.moh.mhealth.objects.SimpleLocation
 import java.time.LocalDate
 import java.util.*
 
@@ -43,7 +44,7 @@ object Converters {
     @JvmStatic
     @TypeConverter
     fun fromArray(arrInt: IntArray): String {
-        if (arrInt.size == 0) {
+        if (arrInt.isEmpty()) {
             return ""
         }
         var str = arrInt[0].toString() + ""

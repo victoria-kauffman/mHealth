@@ -1,9 +1,11 @@
-package com.moh.mhealth
+package com.moh.mhealth.patientdatabase
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import com.moh.mhealth.objects.PatientListTuple
+import com.moh.mhealth.objects.Patient
 import kotlinx.coroutines.flow.Flow
 
 @Dao

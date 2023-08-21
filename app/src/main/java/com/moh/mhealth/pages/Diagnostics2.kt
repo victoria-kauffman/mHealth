@@ -1,5 +1,6 @@
 package com.moh.mhealth.pages
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -7,20 +8,21 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.moh.mhealth.Global_Helper
+import com.moh.mhealth.GlobalHelper
 import com.moh.mhealth.Header
 import com.moh.mhealth.R
 
 class Diagnostics2 : AppCompatActivity(), Header {
-    var bp1Field: EditText? = null
-    var bp2Field: EditText? = null
-    var pField: EditText? = null
-    var rrField: EditText? = null
-    var muacField: EditText? = null
+    private var bp1Field: EditText? = null
+    private var bp2Field: EditText? = null
+    private var pField: EditText? = null
+    private var rrField: EditText? = null
+    private var muacField: EditText? = null
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_diagnostics2)
-        if (!Global_Helper.isMetric()) {
+        if (!GlobalHelper.isMetric) {
             (findViewById<View>(R.id.diag2_muac_unit) as TextView).text = " inches"
         }
         bp1Field = findViewById<View>(R.id.diag2_bp1) as EditText
@@ -32,20 +34,20 @@ class Diagnostics2 : AppCompatActivity(), Header {
         val nextBtn = findViewById<View>(R.id.diag2_next) as Button
         nextBtn.setOnClickListener {
             updatePatientData()
-            startActivity(Intent(applicationContext, Global_Helper.nextDiag()))
+            startActivity(Intent(applicationContext, GlobalHelper.nextDiag()))
         }
     }
 
     private fun updatePatientData() {
-        val sys = Global_Helper.getIntFromEditText(bp1Field)
-        val dias = Global_Helper.getIntFromEditText(bp2Field)
-        val pulse = Global_Helper.getIntFromEditText(pField)
-        val rr = Global_Helper.getIntFromEditText(rrField)
-        var muac = Global_Helper.getDoubleFromEditText(muacField)
-        if (!Global_Helper.isMetric()) { // Gonna have to convert
-            muac = Global_Helper.getInchToCm(muac)
+        val sys = GlobalHelper.getIntFromEditText(bp1Field)
+        val dias = GlobalHelper.getIntFromEditText(bp2Field)
+        val pulse = GlobalHelper.getIntFromEditText(pField)
+        val rr = GlobalHelper.getIntFromEditText(rrField)
+        var muac = GlobalHelper.getDoubleFromEditText(muacField)
+        if (!GlobalHelper.isMetric) { // Gonna have to convert
+            muac = GlobalHelper.getInchToCm(muac)
         }
-        Global_Helper.addDiag2(
+        GlobalHelper.addDiag2(
             intArrayOf(sys, dias),
             pulse,
             rr,
@@ -54,36 +56,36 @@ class Diagnostics2 : AppCompatActivity(), Header {
     }
 
     private fun loadPatientData() {
-        val patient = Global_Helper.getCurrentPatient()
+        val patient = GlobalHelper.currentPatient!!
         val bp = patient.bp
         val p = patient.p
         val rr = patient.rr
         var muac = patient.muac
-        if (!Global_Helper.isMetric() && muac > 0) { // Gonna have to convert
-            muac = Global_Helper.getCmToInch(muac)
+        if (!GlobalHelper.isMetric && muac != null) { // Gonna have to convert
+            muac = GlobalHelper.getCmToInch(muac)
         }
-        val patient_name = findViewById<View>(R.id.header_name) as TextView
-        patient_name.text = patient.name
-        if (rr >= 0) {
-            rrField!!.setText(rr)
+        val patientName = findViewById<View>(R.id.header_name) as TextView
+        patientName.text = patient.name
+        if (rr != null) {
+            rrField!!.setText(rr.toString())
         }
-        if (bp!![0] >= 0) {
-            bp1Field!!.setText(bp!![0])
-            bp2Field!!.setText(bp!![1])
+        if (bp != null) {
+            bp1Field!!.setText(bp[0])
+            bp2Field!!.setText(bp[1])
         }
-        if (p >= 0) {
+        if (p != null) {
             pField!!.setText(p)
         }
-        if (muac >= 0) {
-            muacField!!.setText(muac.toString() + "")
+        if (muac != null) {
+            muacField!!.setText(muac.toString())
         }
     }
 
-    override fun cancel(view: View?) {
-        startActivity(Intent(applicationContext, Global_Helper.endPatient()))
+    override fun cancel(view: View) {
+        startActivity(Intent(applicationContext, GlobalHelper.endPatient()))
     }
 
-    override fun moveBack(view: View?) {
-        startActivity(Intent(applicationContext, Global_Helper.prevDiag()))
+    override fun moveBack(view: View) {
+        startActivity(Intent(applicationContext, GlobalHelper.prevDiag()))
     }
 }

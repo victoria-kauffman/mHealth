@@ -3,11 +3,13 @@ package com.moh.mhealth
 import android.util.Log
 import android.widget.EditText
 import com.moh.mhealth.pages.*
+import com.moh.mhealth.objects.Patient
 import java.time.LocalDate
+import kotlin.math.roundToInt
 
-object Global_Helper {
-    const val USERNAME = "user" // Gonna need to fix
-    const val PASSWORD = "1234" // Gonna need to fix
+object GlobalHelper {
+    const val USERNAME = "" // Gonna need to fix
+    const val PASSWORD = "" // Gonna need to fix
     private val diagOrder = arrayOf<Class<*>>(
         PatientList::class.java,
         NewPatient::class.java,
@@ -21,47 +23,46 @@ object Global_Helper {
         private set
     private var currentDiag = 0
     var isMetric = false
-        private set
 
     fun getLbToKg(lb: Double): Double {
-        return Math.round(lb * 0.45359237 * 100.0) / 100.0
+        return (lb * 0.45359237 * 100.0).roundToInt() / 100.0
     }
 
-    fun getInchToCm(`in`: Double): Double {
-        return Math.round(`in` * 2.54 * 100.0) / 100.0
+    fun getInchToCm(inch: Double): Double {
+        return (inch * 2.54 * 100.0).roundToInt() / 100.0
     }
 
     fun getFToC(f: Double): Double {
-        return Math.round((f - 32) * (5 / 9.0) * 100.0) / 100.0
+        return ((f - 32) * (5 / 9.0) * 100.0).roundToInt() / 100.0
     }
 
     fun getKgToLb(kg: Double): Double {
-        return Math.round(kg / 0.45359237 * 100.0) / 100.0
+        return (kg / 0.45359237 * 100.0).roundToInt() / 100.0
     }
 
     fun getCmToInch(cm: Double): Double {
-        return Math.round(cm / 2.54 * 100.0) / 100.0
+        return (cm / 2.54 * 100.0).roundToInt() / 100.0
     }
 
     fun getCToF(c: Double): Double {
-        return Math.round((9 / 5.0 * c + 32) * 100.0) / 100.0
+        return ((9 / 5.0 * c + 32) * 100.0).roundToInt() / 100.0
     }
 
     fun getDoubleFromEditText(editText: EditText?): Double {
         val doubleStr = editText!!.text.toString()
-        if (!doubleStr.isEmpty()) {
+        if (doubleStr.isNotEmpty()) {
             try {
                 return doubleStr.toDouble()
             } catch (e1: Exception) {
                 // I don't really care about the error I don't think...
             }
         }
-        return (-1).toDouble()
+        return -1.0
     }
 
     fun getIntFromEditText(editText: EditText?): Int {
         val intStr = editText!!.text.toString()
-        if (!intStr.isEmpty()) {
+        if (intStr.isNotEmpty()) {
             try {
                 return intStr.toInt()
             } catch (e1: Exception) {
@@ -71,24 +72,20 @@ object Global_Helper {
         return -1
     }
 
-    fun createNewPatient(name: String?, gender: Char, dob: LocalDate?) {
+    fun createNewPatient(name: String, gender: Char, dob: LocalDate?) {
         currentPatient = Patient(name, gender, dob)
     }
 
-    fun addPatientSurvey(village: String?, distanceTraveled: IntArray?, timeWaited: IntArray?) {
-        currentPatient.setVillage(village)
-        currentPatient.setDistance_traveled(distanceTraveled)
-        currentPatient.setTime_waited(timeWaited)
-    }
-
-    fun setUnits(unitsInt: Int) {
-        isMetric = if (unitsInt == 0) true else false
+    fun addPatientSurvey(village: String, distanceTraveled: IntArray?, timeWaited: IntArray?) {
+        currentPatient?.village = village
+        currentPatient?.distanceTraveled = distanceTraveled
+        currentPatient?.timeWaited = timeWaited
     }
 
     fun addDiag1Metric(kg: Double, cm: Int, tempC: Double) {
-        currentPatient.setWeight(kg)
-        currentPatient.setHeight(cm)
-        currentPatient.setTemp(tempC)
+        currentPatient?.weight = kg
+        currentPatient?.height = cm
+        currentPatient?.temp = tempC
     }
 
     // Wrapper to both save diag1 variables and convert imperial to metric
@@ -101,20 +98,20 @@ object Global_Helper {
     }
 
     fun addDiag2(bp: IntArray?, p: Int, rr: Int, muacCM: Double) {
-        currentPatient.setBp(bp)
-        currentPatient.setP(p)
-        currentPatient.setRr(rr)
-        currentPatient.setMuac(muacCM)
+        currentPatient?.bp = bp
+        currentPatient?.p = p
+        currentPatient?.rr = rr
+        currentPatient?.muac = muacCM
     }
 
-    fun addDiag3(pres: String?, assess: String?) {
-        currentPatient.setPres(pres)
-        currentPatient.setAssess(assess)
+    fun addDiag3(pres: String, assess: String) {
+        currentPatient?.pres = pres
+        currentPatient?.assess = assess
     }
 
-    fun addDiag4(diag: String?, treat: String?) {
-        currentPatient.setDiag(diag)
-        currentPatient.setTreat(treat)
+    fun addDiag4(diag: String, treat: String) {
+        currentPatient?.diag = diag
+        currentPatient?.treat = treat
     }
 
     fun nextDiag(): Class<*> {

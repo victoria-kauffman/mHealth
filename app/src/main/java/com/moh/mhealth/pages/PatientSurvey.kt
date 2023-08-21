@@ -8,17 +8,17 @@ import android.widget.EditText
 import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.moh.mhealth.Global_Helper
+import com.moh.mhealth.GlobalHelper
 import com.moh.mhealth.Header
 import com.moh.mhealth.R
 
 // Set village, time traveled, time waited
 class PatientSurvey : AppCompatActivity(), Header {
-    var villageField: EditText? = null
-    var distanceDaysPicker: NumberPicker? = null
-    var distanceHoursPicker: NumberPicker? = null
-    var timeHoursPicker: NumberPicker? = null
-    var timeMinPicker: NumberPicker? = null
+    private var villageField: EditText? = null
+    private var distanceDaysPicker: NumberPicker? = null
+    private var distanceHoursPicker: NumberPicker? = null
+    private var timeHoursPicker: NumberPicker? = null
+    private var timeMinPicker: NumberPicker? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patient_survey)
@@ -39,12 +39,12 @@ class PatientSurvey : AppCompatActivity(), Header {
         val saveBtn = findViewById<View>(R.id.survey_next) as Button
         saveBtn.setOnClickListener {
             updatePatientData()
-            startActivity(Intent(applicationContext, Global_Helper.nextDiag()))
+            startActivity(Intent(applicationContext, GlobalHelper.nextDiag()))
         }
     }
 
     private fun updatePatientData() {
-        Global_Helper.addPatientSurvey(
+        GlobalHelper.addPatientSurvey(
             villageField!!.text.toString(), intArrayOf(
                 distanceDaysPicker!!.value,
                 distanceHoursPicker!!.value
@@ -56,23 +56,27 @@ class PatientSurvey : AppCompatActivity(), Header {
     }
 
     private fun loadPatientData() {
-        val patient = Global_Helper.getCurrentPatient()!!
-        val patient_name = findViewById<View>(R.id.header_name) as TextView
-        patient_name.text = patient.name
-        villageField.setText(patient.village)
-        val daysTraveled = patient.distance_traveled
-        distanceDaysPicker!!.value = daysTraveled!![0]
-        distanceHoursPicker!!.value = daysTraveled!![1]
-        val timeWaited = patient.time_waited
-        timeHoursPicker!!.value = timeWaited!![0]
-        timeMinPicker!!.value = timeWaited!![1]
+        val patient = GlobalHelper.currentPatient!!
+        val patientName = findViewById<View>(R.id.header_name) as TextView
+        patientName.text = patient.name
+        villageField!!.setText(patient.village)
+        val daysTraveled = patient.distanceTraveled
+        if (daysTraveled != null) {
+            distanceDaysPicker!!.value = daysTraveled[0]
+            distanceHoursPicker!!.value = daysTraveled[1]
+        }
+        val timeWaited = patient.timeWaited
+        if (timeWaited != null) {
+            timeHoursPicker!!.value = timeWaited   [0]
+            timeMinPicker!!.value = timeWaited[1]
+        }
     }
 
-    override fun cancel(view: View?) {
-        startActivity(Intent(applicationContext, Global_Helper.endPatient()))
+    override fun cancel(view: View) {
+        startActivity(Intent(applicationContext, GlobalHelper.endPatient()))
     }
 
-    override fun moveBack(view: View?) {
-        startActivity(Intent(applicationContext, Global_Helper.prevDiag()))
+    override fun moveBack(view: View) {
+        startActivity(Intent(applicationContext, GlobalHelper.prevDiag()))
     }
 }

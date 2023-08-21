@@ -1,4 +1,4 @@
-package com.moh.mhealth
+package com.moh.mhealth.objects
 
 import java.time.LocalDate
 
