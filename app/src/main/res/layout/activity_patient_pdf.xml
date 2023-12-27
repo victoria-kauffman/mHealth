@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -35,7 +35,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="30dp"
                     android:layout_weight="0.33"
-                    android:text="Back to Patient List"></Button>
+                    android:text="Back to Patient List" />
 
                 <Button
                     android:id="@+id/switch_units"
@@ -43,15 +43,22 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="30dp"
                     android:layout_weight="0.33"
-                    android:text="Switch to Imperial Units"></Button>
+                    android:text="Switch to Imperial Units" />
+
+                <Button
+                    android:id="@+id/edit_patient"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="0.33"
+                    android:text="Edit Patient" />
 
                 <Button
                     android:id="@+id/generate_pdf"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
                     android:layout_weight="0.33"
-                    android:text="Save as PDF"></Button>
+                    android:text="Save as PDF" />
             </LinearLayout>
 
             <TextView

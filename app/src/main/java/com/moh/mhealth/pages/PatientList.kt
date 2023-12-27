@@ -1,7 +1,9 @@
 package com.moh.mhealth.pages
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
@@ -36,12 +38,9 @@ class PatientList : AppCompatActivity() {
     }
 
     private fun loadPatientList() {
-        // PatientDatabase db = PatientDatabase.getDbInstance(getApplicationContext());
         val patientList : LinearLayout = findViewById(R.id.patient_list)
-
         patientViewModel.allPatientsIntro.observe(this) {
             val patients: List<PatientListTuple>? = patientViewModel.allPatientsIntro.value
-
             if (patients != null) {
                 for (p in patients) {
                     val pLayout = LinearLayout(this)
@@ -62,7 +61,7 @@ class PatientList : AppCompatActivity() {
                         0.3f
                     )
                     pName.textSize = 25F
-                    pName.setTextColor(0x000000)
+                    pName.setTextColor(Color.BLACK)
 
                     pDob.text = p.dob!!.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 
@@ -72,13 +71,18 @@ class PatientList : AppCompatActivity() {
                         0.7f
                     )
                     pDob.textSize = 25F
-                    pDob.setTextColor(0x000000)
+                    pDob.setTextColor(Color.BLACK)
 
                     pLayout.addView(pName)
+                    Log.d("Name: ", pName.text.toString())
                     pLayout.addView(pDob)
                     patientList.addView(pLayout)
                 }
+                // Refresh the layout view
+                patientList.refreshDrawableState()
             }
+
+
 
         }
     }

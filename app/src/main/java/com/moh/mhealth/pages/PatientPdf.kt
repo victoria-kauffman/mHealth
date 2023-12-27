@@ -2,19 +2,31 @@ package com.moh.mhealth.pages
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.pdf.PdfDocument
+import android.graphics.pdf.PdfDocument.PageInfo
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.moh.mhealth.*
 import com.moh.mhealth.objects.Patient
 import com.moh.mhealth.patientdatabase.PatientViewModel
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
 import java.time.format.DateTimeFormatter
 import kotlin.math.roundToInt
 
-class PatientPdf : AppCompatActivity() {
 
+class PatientPdf : AppCompatActivity() {
+    val REQUEST_CODE = 1232
     private val patientViewModel: PatientViewModel by viewModels { PatientViewModel.Factory }
 
     private var switchUnit : Button? = null
@@ -53,7 +65,7 @@ class PatientPdf : AppCompatActivity() {
 
         val generatePDF : Button = findViewById(R.id.generate_pdf)
         generatePDF.setOnClickListener {
-
+            generatePDF()
         }
     }
 
@@ -126,6 +138,47 @@ class PatientPdf : AppCompatActivity() {
             findViewById<TextView>(R.id.pdf_muac).text =
                 "Middle Upper Arm Circumference: " + (GlobalHelper.getCmToInch(patient.muac!!)
                     .toString()) + " inches"
+        }
+    }
+
+    private fun generatePDF() {
+
+    }
+
+
+    private fun createPDF() {
+        val document = PdfDocument()
+        val pageInfo = PageInfo.Builder(1080, 1920, 1).create()
+        val page = document.startPage(pageInfo)
+
+        val canvas = page.canvas
+
+        val paint = Paint()
+        paint.color = Color.RED
+        paint.textSize = 42f
+
+        val text = "Hello, World"
+        val x = 500f
+        val y = 900f
+
+        canvas.drawText(text, x, y, paint)
+        document.finishPage(page)
+
+        val downloadsDir =
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+        val fileName = "example.pdf"
+        val file = File(downloadsDir, fileName)
+        try {
+            val fos = FileOutputStream(file)
+            document.writeTo(fos)
+            document.close()
+            fos.close()
+            Toast.makeText(this, "Written Successfully!!!", Toast.LENGTH_SHORT).show()
+        } catch (e: FileNotFoundException) {
+            Log.d("mylog", "Error while writing " + e.toString())
+            throw RuntimeException(e)
+        } catch (e: IOException) {
+            throw RuntimeException(e)
         }
     }
 }
